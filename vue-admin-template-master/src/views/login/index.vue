@@ -131,7 +131,7 @@ export default {
         if (valid) {
           // 在这里发送请求
           this.$request({
-            url: "api/sys/login",
+            url: "/sys/login",
             method: "post",
             data: this.loginForm,
           });
