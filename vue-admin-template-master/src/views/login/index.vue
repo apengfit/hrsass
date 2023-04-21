@@ -129,8 +129,18 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
+          this.loading = true;
           // 在这里发送请求
-          this.login(this.loginForm);
+          this.login(this.loginForm)
+            .then((res) => {
+              this.$router.push("/");
+            })
+            .catch((error) => {
+              console.log(error);
+            })
+            .finally(() => {
+              this.loading = false;
+            });
         }
       });
     },
