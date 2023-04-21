@@ -69,8 +69,7 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
-
+import { mapActions } from "vuex";
 export default {
   name: "Login",
   data() {
@@ -90,8 +89,8 @@ export default {
     };
     return {
       loginForm: {
-        mobile: "18000003333",
-        password: "111111",
+        mobile: "13800000002",
+        password: "123456",
       },
       loginRules: {
         mobile: [
@@ -116,6 +115,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions("user", ["login"]),
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";
@@ -130,11 +130,7 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           // 在这里发送请求
-          this.$request({
-            url: "/sys/login",
-            method: "post",
-            data: this.loginForm,
-          });
+          this.login(this.loginForm);
         }
       });
     },
