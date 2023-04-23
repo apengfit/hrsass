@@ -15,7 +15,15 @@ router.beforeEach((to, from, next) => {
             next('/');
             NProgress.done();
         } else {
-            next();//正常放行
+            if (Object.keys(store.state.user.userInfo).length <= 0) {
+                store.dispatch("user/getUserInfo").then(() => {
+                    next();
+                })
+            } else {
+                next();//正常放行
+            }
+
+
             NProgress.done();
         }
     } else {
